@@ -42,11 +42,10 @@ func NewAuthzRequest() (req *AuthzRequest) {
 	return
 }
 
-func NewAuthzResponse() (resp *AuthzResponse) {
-	resp = &AuthzResponse{
+func NewAuthzResponse() *AuthzResponse {
+	return &AuthzResponse{
 		BaseResponse: &response.BaseResponse{},
 	}
-	return
 }
 
 func (r *AuthzResponse) String() string {
