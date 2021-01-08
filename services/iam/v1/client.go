@@ -1,10 +1,10 @@
-package iam
+package v1
 
 import "github.com/marmotedu/medu-sdk-go/sdk"
 
 const (
 	defaultEndpoint = "127.0.0.1:9090"
-	serviceName     = "iam"
+	serviceName     = "iam.authz"
 )
 
 type Client struct {

@@ -3,15 +3,16 @@ package main
 import (
 	"fmt"
 
-	"github.com/marmotedu/medu-sdk-go/sdk"
-	"github.com/marmotedu/medu-sdk-go/services/iam"
 	"github.com/ory/ladon"
+
+	"github.com/marmotedu/medu-sdk-go/sdk"
+	iamv1 "github.com/marmotedu/medu-sdk-go/services/iam/v1"
 )
 
 func main() {
-	client, _ := iam.NewClientWithSecret("XhbY3aCrfjdYcP1OFJRu9xcno8JzSbUIvGE2", "bfJRvlFwsoW9L30DlG87BBW0arJamSeK")
+	client, _ := iamv1.NewClientWithSecret("XhbY3aCrfjdYcP1OFJRu9xcno8JzSbUIvGE2", "bfJRvlFwsoW9L30DlG87BBW0arJamSeK")
 
-	req := iam.NewAuthzRequest()
+	req := iamv1.NewAuthzRequest()
 	req.Resource = sdk.String("resources:articles:ladon-introduction")
 	req.Action = sdk.String("delete")
 	req.Subject = sdk.String("users:peter")

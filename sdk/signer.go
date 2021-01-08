@@ -13,9 +13,10 @@ import (
 	"strings"
 	"time"
 
+	"github.com/marmotedu/component-base/pkg/auth"
+
 	"github.com/marmotedu/medu-sdk-go/sdk/log"
 
-	jwt "github.com/dgrijalva/jwt-go"
 	uuid "github.com/satori/go.uuid"
 )
 
@@ -45,7 +46,7 @@ func init() {
 }
 
 type Signer interface {
-	Sign(serviceName string, r *http.Request, body io.ReadSeeker) (http.Header, error)
+	Sign(serviceName string, r *http.Request, body io.ReadSeeker) http.Header
 }
 
 type BaseSignature struct {
@@ -104,28 +105,10 @@ func NewSignatureV1(cred *Credential, logger log.Logger) Signer {
 	}
 }
 
-func (v1 SignatureV1) Sign(serviceName string, r *http.Request, body io.ReadSeeker) (http.Header, error) {
-	claims := jwt.MapClaims{
-		"exp": time.Now().Add(2 * time.Hour).Unix(),
-		"iat": time.Now().Unix(),
-		"nbf": time.Now().Add(0).Unix(),
-		"aud": "iam.authz.marmotedu.com",
-		"iss": "medu-sdk-go",
-	}
-
-	// create a new token
-	token := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), claims)
-
-	token.Header["kid"] = v1.Credentials.SecretID
-
-	// Sign the token with the specified secret.
-	tokenString, err := token.SignedString([]byte(v1.Credentials.SecretKey))
-	if err != nil {
-		return r.Header, err
-	}
-
+func (v1 SignatureV1) Sign(serviceName string, r *http.Request, body io.ReadSeeker) http.Header {
+	tokenString := auth.Sign(v1.Credentials.SecretID, v1.Credentials.SecretKey, "medu-sdk-go", serviceName+".marmotedu.com")
 	r.Header.Set("Authorization", fmt.Sprintf("Bearer %s", tokenString))
-	return r.Header, nil
+	return r.Header
 
 }
 
@@ -139,11 +122,11 @@ func NewSignatureV2(cred *Credential, logger log.Logger) Signer {
 }
 
 // Sign signs the request by using AWS 24 signer algorithm, and adds Authorization header
-func (v2 SignatureV2) Sign(serviceName string, r *http.Request, body io.ReadSeeker) (http.Header, error) {
+func (v2 SignatureV2) Sign(serviceName string, r *http.Request, body io.ReadSeeker) http.Header {
 	return v2.signWithBody(serviceName, r, body, 0)
 }
 
-func (v2 SignatureV2) signWithBody(serviceName string, r *http.Request, body io.ReadSeeker, exp time.Duration) (http.Header, error) {
+func (v2 SignatureV2) signWithBody(serviceName string, r *http.Request, body io.ReadSeeker, exp time.Duration) http.Header {
 	ctx := &signingCtx{
 		Request:     r,
 		Body:        body,
@@ -165,7 +148,7 @@ func (v2 SignatureV2) signWithBody(serviceName string, r *http.Request, body io.
 	ctx.build()
 
 	v2.logSigningInfo(ctx)
-	return ctx.SignedHeaderVals, nil
+	return ctx.SignedHeaderVals
 }
 
 const logSignInfoMsg = `DEBUG: Request Signature:

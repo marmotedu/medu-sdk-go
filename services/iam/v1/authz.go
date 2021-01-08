@@ -1,8 +1,7 @@
-package iam
+package v1
 
 import (
-	"encoding/json"
-
+	"github.com/marmotedu/component-base/pkg/json"
 	"github.com/ory/ladon"
 
 	"github.com/marmotedu/medu-sdk-go/sdk/request"
@@ -42,11 +41,10 @@ func NewAuthzRequest() (req *AuthzRequest) {
 	return
 }
 
-func NewAuthzResponse() (resp *AuthzResponse) {
-	resp = &AuthzResponse{
+func NewAuthzResponse() *AuthzResponse {
+	return &AuthzResponse{
 		BaseResponse: &response.BaseResponse{},
 	}
-	return
 }
 
 func (r *AuthzResponse) String() string {
