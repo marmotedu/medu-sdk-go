@@ -45,7 +45,16 @@ allowed: true
 ```
 
 
-## 参考
+## 其它参考
 
 - 代码请参考：[authz.go](./examples/authz.go)
 - 其它marmotedu SDK实现：[marmotedu-sdk-go](https://github.com/marmotedu/marmotedu-sdk-go)
+
+## 参考项目
+
+- [tencentcloud-sdk-go](https://github.com/TencentCloud/tencentcloud-sdk-go)
+- [alibaba-cloud-sdk-go](https://github.com/aliyun/alibaba-cloud-sdk-go)
+- [jdcloud-sdk-go](https://github.com/jdcloud-api/jdcloud-sdk-go)
+- [ucloud-sdk-go](https://github.com/ucloud/ucloud-sdk-go)
+- [aws-sdk-go](https://github.com/aws/aws-sdk-go)
+- [azure-sdk-for-go](https://github.com/Azure/azure-sdk-for-go)
