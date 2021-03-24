@@ -1,11 +1,11 @@
 package response
 
 import (
-	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 
+	"github.com/marmotedu/component-base/pkg/json"
 	"github.com/marmotedu/medu-sdk-go/sdk/errors"
 )
 

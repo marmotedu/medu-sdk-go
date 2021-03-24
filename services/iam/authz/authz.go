@@ -1,8 +1,7 @@
 package iam
 
 import (
-	"encoding/json"
-
+	"github.com/marmotedu/component-base/pkg/json"
 	"github.com/ory/ladon"
 
 	"github.com/marmotedu/medu-sdk-go/sdk/request"

@@ -1,7 +1,6 @@
 package sdk
 
 import (
-	"encoding/json"
 	"errors"
 	"fmt"
 	urllib "net/url"
@@ -9,6 +8,7 @@ import (
 	"regexp"
 	"strings"
 
+	"github.com/marmotedu/component-base/pkg/json"
 	"github.com/marmotedu/medu-sdk-go/sdk/log"
 	"github.com/marmotedu/medu-sdk-go/sdk/request"
 )

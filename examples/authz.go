@@ -3,9 +3,10 @@ package main
 import (
 	"fmt"
 
-	"github.com/marmotedu/medu-sdk-go/sdk"
-	"github.com/marmotedu/medu-sdk-go/services/iam"
 	"github.com/ory/ladon"
+
+	"github.com/marmotedu/medu-sdk-go/sdk"
+	iam "github.com/marmotedu/medu-sdk-go/services/iam/authz"
 )
 
 func main() {

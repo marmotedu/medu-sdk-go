@@ -1,12 +1,12 @@
 package sdk
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
 	"runtime"
 	"strings"
 
+	"github.com/marmotedu/component-base/pkg/json"
 	"github.com/marmotedu/medu-sdk-go/sdk/log"
 	"github.com/marmotedu/medu-sdk-go/sdk/request"
 	"github.com/marmotedu/medu-sdk-go/sdk/response"
@@ -80,7 +80,7 @@ func (c *Client) Send(req request.Request, resp response.Response) error {
 
 	sign := func(r *http.Request) error {
 		signer := NewSigner(c.signMethod, c.Credential, c.Logger)
-		_, err := signer.Sign(c.ServiceName, r, strings.NewReader(body))
+		_ = signer.Sign(c.ServiceName, r, strings.NewReader(body))
 		return err
 	}
 
