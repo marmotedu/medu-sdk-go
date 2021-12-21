@@ -3,7 +3,7 @@ module github.com/marmotedu/medu-sdk-go
 go 1.17
 
 require (
-	github.com/marmotedu/component-base v1.6.0
+	github.com/marmotedu/component-base v1.6.2
 	github.com/ory/ladon v1.2.0
 	github.com/satori/go.uuid v1.2.0
 	github.com/sirupsen/logrus v1.8.1
